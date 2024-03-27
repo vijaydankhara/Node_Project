@@ -51,8 +51,6 @@ module.exports = class CartServices {
             return error.message;
         }
     };
-
-    // Updare Many Carts
     async updateMany (user, body) {
         try {
             return await Cart.updateMany({ user: user}, { $set: body}, { new: true});
