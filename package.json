@@ -1,13 +1,13 @@
 {
   "name": "node_project",
   "version": "1.0.0",
-  "description": "",
+  "description": "furniture app",
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
-  "author": "",
+  "author": "Vijay Dankhara",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
