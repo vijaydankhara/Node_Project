@@ -64,7 +64,7 @@ exports.updateCart = async (req, res) => {
         if (!cart) {
             return res.status(404).json({ message: `No Cart Found with this ID`});
         }
-        cart = await cartService.updateCart(cart._id, {$set: { ...req.body}}, {new: true});
+        cart = await cartService.updateCart(cart._id,{ ...req.body}, {new: true});
         res.status(200).json({ cart, message: `Cart Item Updated SuccessFully.....`});
     } catch (error) {
         console.log(error);

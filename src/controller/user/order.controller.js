@@ -18,7 +18,7 @@ exports.addNewOrder = async(req, res) => {
             price: item.cartItem.price
         }));
         console.log(orderItems);
-        let totalPrice = orderItems.reduce((total, item) => total + (item.price * item.quantity), 70);
+        let totalPrice = orderItems.reduce((total, item) => total + (item.price * item.quantity), 100);
         console.log(totalPrice);
         let newOrder = await orderServiece.addToOrder({
             user: res.user._id,
@@ -73,7 +73,7 @@ exports.deleteOrder = async (req, res) => {
         let order = await orderServiece.getOrder({_id: req.query.orderId});
         console.log(order);
         if (!order) {
-            res.status(404).json({ message: `Orders Not Found..Plase Try Again...`});
+            res.status(404).json({ message: `Orders Not Found......Plase Try Again......`});
         }
         order = await orderServiece.updateOrder(req.body.orderId, {isDelete: true })
         res.status(200).json({order, message: `Your Order Deleted Successfully...`});
