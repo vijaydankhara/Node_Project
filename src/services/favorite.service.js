@@ -1,3 +1,4 @@
+const favoriteModel = require('../model/favorite.model');
 const Favorites = require('../model/favorite.model');
 module.exports = class FavoriteServices{
 
@@ -17,7 +18,7 @@ module.exports = class FavoriteServices{
             let find = [
                 { $match: { isDelete: false }}
             ];
-            let result = await Cart.aggregate(find);
+            let result = await Favorites.aggregate(find);
             return result;
         } catch (error) {
             console.log(error);
