@@ -12,7 +12,7 @@ module.exports = class OrderServices{
     };
 
     // get all order
-    async getAllOrders (body) {
+    async getAllOrder (body) {
         try {
             return await Order.find(body).populate('user').populate('items');
         } catch (error) {
