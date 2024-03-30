@@ -11,20 +11,12 @@ module.exports = class OrderServices{
         }
     };
 
-    // get all order
-    async getAllOrder (body) {
-        try {
-            return await Order.find(body).populate('user').populate('items');
-        } catch (error) {
-            console.log(error);
-            return error.message;            
-        }
-    };
-
+   
     // get order
     async getOrder (body) {
         try {
-            return await Order.findOne(body).populate('user').populate('items');
+            return await Order.findOne(body);
+            // return await Order.findOne(body).populate('user').populate('items');
         } catch (error) {
             console.log(error);
             return error.message;
@@ -32,7 +24,8 @@ module.exports = class OrderServices{
     };
     async getOrderById (id) {
         try {
-            return await Order.findById(id).populate('user').populate('items');
+            return await Order.findById(id);
+            // return await Order.findById(id).populate('user').populate('items');
         } catch (error) {
             console.log(error);
             return error.message;
@@ -40,10 +33,40 @@ module.exports = class OrderServices{
     };
     async updateOrder (id, body){
         try {
-            return await Order.findOneAndUpdate(id, { $set: body} , { new : true }).populate('user').populate('items');
+            return await Order.findByIdAndUpdate(id, { $set: body} , { new : true }).populate('user').populate('items');
         } catch (error) {
             console.log(error);
             return error.message;  
         }
-    }
+    };
+
+
+    //  get all order
+
+    async getAllOrder(query) {
+        try {
+            let find = [
+                { $match: { isDelete: false } },
+
+            ];
+
+            let result = await Order.aggregate(find);
+            return result;
+        } catch (error) {
+            console.log(error);
+            return error.message;
+        }
+    };
+    
+
+
+    //  async getAllOrder (body) {
+    //     try {
+    //         return await Order.find(body).populate('user').populate('items');
+    //     } catch (error) {
+    //         console.log(error);
+    //         return error.message;            
+    //     }
+    // }
+
 }

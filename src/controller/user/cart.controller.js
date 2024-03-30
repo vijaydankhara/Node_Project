@@ -60,11 +60,11 @@ exports.getCart = async (req, res) => {
 //  Update Cart
 exports.updateCart = async (req, res) => {
     try {
-        let cart = await cartService.getCart({_id: req.query.cartId});
+        let cart = await cartService.getCart({_id: req.query.cartId , isDelete: false});
         if (!cart) {
             return res.status(404).json({ message: `No Cart Found with this ID`});
         }
-        cart = await cartService.updateCart(cart._id,{ ...req.body}, {new: true});
+        cart = await cartService.updateCart(cart._id,{ ...req.body});
         res.status(200).json({ cart, message: `Cart Item Updated SuccessFully.....`});
     } catch (error) {
         console.log(error);
@@ -80,7 +80,7 @@ exports.deleteCart = async (req, res) => {
         if(!cart){
             return res.status(404).json({ message: `No Cart Found with this ID`});
         }
-        cart = await cartService.updateCart(cart._id ,{isDelete : true});
+        cart = await cartService.updateCart(cart._id ,req.body ,{isDelete : true});
         res.status(200).json({message:`Cart Deleted Successfully......`}); 
     } catch (error) {
         console.log(error);

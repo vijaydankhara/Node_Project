@@ -10,19 +10,7 @@ module.exports = class CartServices {
         }
     };
 
-    // Get All Cart
-    async getAllCart(query) {
-        try {
-            let find = [
-                { $match: { isDelete: false}}
-            ];
-            let result = await Cart.aggregate(find);
-            return result;
-        } catch (error) {
-            console.log(error);
-            return error.message;
-        }
-    };
+
 
     // Get Single Cart
     async getCart(body) {
@@ -58,5 +46,34 @@ module.exports = class CartServices {
             console.log(error);
             return error.message;
         }
-    }
+    };
+
+    async getAllCart(query, user) {
+        try {
+            let userCarts = query.me && query.me === 'true' ? [
+                {
+                    $match: { user: user._id, isDelete: false }
+                }
+            ] : [];
+            let find = [
+                { $match: { isDelete: false } },
+                ...userCarts,
+                {
+                    $lookup: {
+                        from: "products",
+                        localField: 'cartItem',
+                        foreignField: '_id',
+                        as: 'cartItem'
+                    }
+                },
+                { $set: { "cartItem": { $first: "$cartItem" } } } 
+            ];
+            let result = await Cart.aggregate(find);
+            return result;
+        } catch (error) {
+            console.log(error);
+            return error.message;
+        }
+    };
+
 }
