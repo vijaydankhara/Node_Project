@@ -16,7 +16,7 @@ exports.getAllReview = async (req, res) => {
 
 exports.deleteReview = async (req, res) => {
     try {
-        let review = await reviewService.getReviewById(req.query.Id);
+        let review = await reviewService.getReviewById(req.query.reviewId);
         if (!review) {
             return res.status(404).json({ message: ` This Review does not exist!` });
         }
