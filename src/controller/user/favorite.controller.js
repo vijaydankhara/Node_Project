@@ -35,14 +35,15 @@ exports.getAllFavorite = async (req, res) => {
 
 exports.deleteFavorite = async (req, res) => {
     try {
-        let favorite = await favoriteService.getFavorite(req.query.favoriteId);
+        let favorite = await favoriteService.getFavorite(req.query.Id);
         if(!favorite){
             return res.status(404).json({message:"Favorite not found."});
         }
-        favorite = await favoriteService.updateFavorite(req.body.favoriteId, {isDelete: true});
+        console.log(favorite);
+        favorite = await favoriteService.updateFavorite(favorite._id, {isDelete: true});
         res.status(201).json({ favorite, message: `Favorite Item is Deleted Successfully..`});
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: `Internal Server Error ${console.error()}`});
     }
-};
+}; 

@@ -60,14 +60,14 @@ exports.getOrder = async (req, res) => {
     }
 };
 
+// Delete Order
 exports.deleteOrder = async (req, res) => {
     try {
-        let order = await orderService.getOrder({_id: req.query.orderId});
+        let order = await orderService.updateOrder(req.body.orderId, {isDelete: true })
         // console.log(order);
         if (!order) {
-            res.status(404).json({ message: `Orders Not Found.....`});
+            res.status(404).json({ message: `Orders Not Found..Plase Try Again...`});
         }
-        order = await orderServiece.updateOrder(req.body.orderId, {isDelete: true })
         res.status(200).json({order, message: `Your Order Deleted Successfully...`});
     } catch (error) {
         console.log(error);
