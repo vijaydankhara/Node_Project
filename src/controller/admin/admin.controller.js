@@ -129,7 +129,7 @@ exports.updatePassword = async(req, res) => {
         if(newPassword !== confirmPassword){
             return res.json({ message: `New Password and Confirm  Password are not same.` });
         }
-        let hashPassword = await bcryptjs.hash(newPassword, 10);
+        let hashPassword = await bcrypt.hash(newPassword, 10);
         admin = await userService.updateUser(req.admin._id, { password: hashPassword});
         res.status(200).json({ message: 'Password changed successfully.....' });
     } catch (error) {
