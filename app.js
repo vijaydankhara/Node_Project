@@ -18,9 +18,9 @@ app.use('/api/user', usersRoutes);
 
 app.listen(port, async () => {
     mongoose.connect(process.env.MONGO_DB_URL)
-    .then(()=>console.log('DB Is Connected'))
+    .then(()=>console.log('DB Is Connected ✔︎✔︎✔︎'))
     .catch(err => console.log(err.message));
-    console.log(`server start at http://localhost:${port}`);
+    console.log(`server start at http://localhost:${port} ✔︎✔︎✔︎`);
 });
 
 
