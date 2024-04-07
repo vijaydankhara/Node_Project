@@ -1,6 +1,6 @@
 const adminsroutes = require('express').Router();
 const userRoutes = require('./admin.routes');
-const productRoutes = require('./product.routes');
+const productRoutes = require('../../routes/admin/product.routes');
 const cartRoutes = require('../../routes/admin/cart.routes');
 const reviewRoutes = require('../admin/review.routes');
 
